@@ -47,7 +47,7 @@ export function RecepcionAttendancePage() {
       {/* Header */}
       <div>
         <span className="text-[10px] font-black uppercase text-slate-400 tracking-wider">
-          MÓDULO 3 · CLASES GRUPALES · RECEPCIÓN
+          CLASES GRUPALES · RECEPCIÓN
         </span>
         <h1 className="text-2xl sm:text-3xl font-black text-[#1B2A55] font-outfit mt-0.5">
           Toma de asistencia

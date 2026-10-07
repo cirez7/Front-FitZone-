@@ -61,7 +61,7 @@ export function SocioHomePage() {
               <Sparkles className="w-3.5 h-3.5 text-[#F0B429]" />
               <span>Sede actual: {selectedSede}</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-black font-outfit tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-black font-outfit tracking-tight text-white">
               ¡Hola de nuevo, {currentUser.name.split(' ')[0]}!
             </h1>
             <p className="text-xs sm:text-sm text-slate-300 max-w-lg leading-relaxed">

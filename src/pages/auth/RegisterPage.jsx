@@ -11,14 +11,13 @@ export function RegisterPage() {
     email: '',
     dni: '',
     phone: '',
-    accountType: 'socio', // 'socio' | 'externo'
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setStep('verifying');
 
-    // Simulate identity verification step (Figma: registro-desktop-verificando)
+    // Simula paso de verificación de identidad
     setTimeout(() => {
       setStep('success');
       triggerConfetti();
@@ -26,11 +25,7 @@ export function RegisterPage() {
   };
 
   const handleFinish = () => {
-    if (formData.accountType === 'socio') {
-      switchRole(ROLES.SOCIO_ACTIVO);
-    } else {
-      switchRole(ROLES.EXTERNO);
-    }
+    switchRole(ROLES.SOCIO_ACTIVO);
   };
 
   return (
@@ -55,36 +50,7 @@ export function RegisterPage() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Account Type Selector */}
-              <div className="space-y-1">
-                <label className="block text-xs font-bold text-[#1B2A55] uppercase tracking-wider">
-                  Tipo de Registro
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setFormData({ ...formData, accountType: 'socio' })}
-                    className={`py-2.5 px-3 rounded-xl text-xs font-bold border transition-all ${
-                      formData.accountType === 'socio'
-                        ? 'bg-[#1B2A55] text-white border-[#1B2A55]'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                    }`}
-                  >
-                    🏋️ Socio FitZone
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setFormData({ ...formData, accountType: 'externo' })}
-                    className={`py-2.5 px-3 rounded-xl text-xs font-bold border transition-all ${
-                      formData.accountType === 'externo'
-                        ? 'bg-[#1B2A55] text-white border-[#1B2A55]'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                    }`}
-                  >
-                    🎾 Cliente Externo
-                  </button>
-                </div>
-              </div>
+
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1">
@@ -196,9 +162,7 @@ export function RegisterPage() {
                 ¡Cuenta Creada con Éxito!
               </h3>
               <p className="text-xs text-slate-600 mt-1 max-w-xs mx-auto leading-relaxed">
-                {formData.accountType === 'socio'
-                  ? 'Tu cuenta de socio activo ha sido habilitada. Ya podés disfrutar de reservas con descuento y tu pase digital.'
-                  : 'Tu cuenta de cliente externo ha sido creada. Podés reservar canchas al instante.'}
+                Tu cuenta ha sido creada exitosamente. Ya podés comenzar a reservar canchas, consultar clases y acceder a tu perfil.
               </p>
             </div>
 

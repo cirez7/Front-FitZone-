@@ -5,13 +5,13 @@ import {
   Layers, 
   Dumbbell, 
   QrCode, 
-  User, 
   Calendar, 
   MapPin, 
   ScanLine, 
   Activity, 
   DollarSign,
-  TrendingUp 
+  TrendingUp,
+  MoreHorizontal
 } from 'lucide-react';
 
 export function BottomNav() {
@@ -26,7 +26,7 @@ export function BottomNav() {
           { id: 'courts', label: 'Canchas', icon: Layers, route: 'courts' },
           { id: 'qr', label: 'Mi QR', icon: QrCode, route: 'qr', isCenter: true },
           { id: 'classes', label: 'Clases', icon: Dumbbell, route: 'classes' },
-          { id: 'profile', label: 'Perfil', icon: User, route: 'profile' },
+          { id: 'more', label: 'Más', icon: MoreHorizontal, route: 'more' },
         ];
 
       case ROLES.EXTERNO:
@@ -35,7 +35,7 @@ export function BottomNav() {
           { id: 'courts', label: 'Canchas', icon: Layers, route: 'courts' },
           { id: 'reservations', label: 'Reservas', icon: Calendar, route: 'reservations' },
           { id: 'sedes', label: 'Sedes', icon: MapPin, route: 'sedes' },
-          { id: 'profile', label: 'Perfil', icon: User, route: 'profile' },
+          { id: 'more', label: 'Más', icon: MoreHorizontal, route: 'more' },
         ];
 
       case ROLES.RECEPCION:
@@ -44,14 +44,14 @@ export function BottomNav() {
           { id: 'recepcion-scanner', label: 'Escanear', icon: ScanLine, route: 'recepcion-scanner', isCenter: true },
           { id: 'recepcion-aforo', label: 'Aforo', icon: Activity, route: 'recepcion-aforo' },
           { id: 'recepcion-agenda', label: 'Agenda', icon: Dumbbell, route: 'recepcion-agenda' },
-          { id: 'recepcion-cash', label: 'Caja', icon: DollarSign, route: 'recepcion-cash' },
+          { id: 'more', label: 'Más', icon: MoreHorizontal, route: 'more' },
         ];
 
       case ROLES.GERENTE_CENTRAL:
         return [
           { id: 'gerente-dashboard', label: 'Dashboard', icon: TrendingUp, route: 'gerente-dashboard' },
           { id: 'sedes', label: 'Sedes', icon: MapPin, route: 'sedes' },
-          { id: 'profile', label: 'Gerencia', icon: User, route: 'profile' },
+          { id: 'more', label: 'Más', icon: MoreHorizontal, route: 'more' },
         ];
 
       default:
@@ -73,7 +73,7 @@ export function BottomNav() {
               <button
                 key={tab.id}
                 onClick={() => navigate(tab.route)}
-                className="flex flex-col items-center justify-center -mt-5 focus:outline-none group"
+                className="flex flex-col items-center justify-center -mt-5 focus:outline-none group cursor-pointer"
               >
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-transform group-hover:scale-105 ${
                   isActive ? 'bg-[#F26D6D] text-white ring-4 ring-rose-100' : 'bg-[#1B2A55] text-white'
@@ -93,7 +93,7 @@ export function BottomNav() {
             <button
               key={tab.id}
               onClick={() => navigate(tab.route)}
-              className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-colors focus:outline-none ${
+              className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-colors focus:outline-none cursor-pointer ${
                 isActive ? 'text-[#1B2A55]' : 'text-slate-400 hover:text-slate-600'
               }`}
             >

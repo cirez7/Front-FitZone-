@@ -37,7 +37,7 @@ export function Navbar() {
       case ROLES.EXTERNO:
         return <Badge variant="gold-soft">CLIENTE EXTERNO</Badge>;
       case ROLES.RECEPCION:
-        return <Badge variant="navy-soft">ADMIN. DE SEDE</Badge>;
+        return <Badge variant="navy-soft">RECEPCIONISTA</Badge>;
       case ROLES.GERENTE_CENTRAL:
         return <Badge variant="navy">GERENCIA CENTRAL</Badge>;
       default:
@@ -105,11 +105,12 @@ export function Navbar() {
               </button>
             )}
 
-            {/* User Profile trigger with dropdown */}
+            {/* User Profile trigger with dropdown/modal */}
             <div className="relative">
               <button
-                onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-                className="flex items-center gap-2.5 p-1.5 rounded-xl hover:bg-slate-100 transition-colors focus:outline-none"
+                onClick={() => setIsProfileDropdownOpen(prev => !prev)}
+                className="flex items-center gap-2.5 p-1.5 rounded-xl hover:bg-slate-100 transition-colors focus:outline-none cursor-pointer"
+                title="Menú de perfil"
               >
                 <div className="w-9 h-9 rounded-xl bg-[#1B2A55] text-white flex items-center justify-center font-bold text-xs shadow-sm overflow-hidden border border-slate-200">
                   {currentUser.avatar ? (
@@ -128,47 +129,72 @@ export function Navbar() {
                 </div>
               </button>
 
-              {/* Profile Dropdown */}
+              {/* Menú flotante/modal activado por clic/tap en foto de perfil */}
               {isProfileDropdownOpen && (
-                <div 
-                  className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-modal border border-slate-100 p-2 z-50 animate-slide-up"
-                  onClick={() => setIsProfileDropdownOpen(false)}
-                >
-                  <div className="p-3 border-b border-slate-100">
-                    <p className="text-xs font-bold text-[#1B2A55]">{currentUser.name}</p>
-                    <p className="text-[11px] text-slate-400 truncate">{currentUser.email}</p>
-                    <div className="mt-2">{getRoleBadge()}</div>
-                  </div>
+                <>
+                  {/* Backdrop para cerrar al tocar fuera en mobile/desktop */}
+                  <div 
+                    className="fixed inset-0 z-40 bg-slate-900/20 backdrop-blur-xs sm:bg-transparent"
+                    onClick={() => setIsProfileDropdownOpen(false)}
+                  />
 
-                  <div className="py-1">
-                    <button
-                      onClick={() => navigate('profile')}
-                      className="w-full text-left px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 rounded-lg flex items-center gap-2"
-                    >
-                      <User className="w-4 h-4 text-slate-400" />
-                      <span>Mi perfil y membresía</span>
-                    </button>
-                    {(currentRole === ROLES.SOCIO_ACTIVO || currentRole === ROLES.SOCIO_VENCIDO) && (
+                  <div 
+                    className="fixed sm:absolute right-4 sm:right-0 top-20 sm:top-full mt-2 w-[calc(100vw-2rem)] sm:w-72 bg-white rounded-3xl shadow-2xl border border-slate-100 p-4 z-50 animate-slide-up"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {/* 1. Nombre completo y 2. Correo electrónico */}
+                    <div className="flex items-center gap-3.5 pb-3.5 border-b border-slate-100">
+                      <div className="w-12 h-12 rounded-2xl bg-[#1B2A55] text-white flex items-center justify-center font-bold text-base shadow-sm overflow-hidden shrink-0">
+                        {currentUser.avatar ? (
+                          <img src={currentUser.avatar} alt={currentUser.name} className="w-full h-full object-cover" />
+                        ) : (
+                          currentUser.initials || 'FZ'
+                        )}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h4 className="text-sm font-extrabold text-[#1B2A55] truncate">
+                          {currentUser.name}
+                        </h4>
+                        <p className="text-xs text-slate-400 truncate">
+                          {currentUser.email}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* 3. Tipo de rol */}
+                    <div className="py-3 border-b border-slate-100 flex items-center justify-between">
+                      <span className="text-xs font-semibold text-slate-500">Tipo de rol:</span>
+                      <div>
+                        {getRoleBadge()}
+                      </div>
+                    </div>
+
+                    {/* Acciones y 4. Opción de Cerrar sesión */}
+                    <div className="pt-2 space-y-1">
                       <button
-                        onClick={() => navigate('history')}
-                        className="w-full text-left px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 rounded-lg flex items-center gap-2"
+                        onClick={() => {
+                          setIsProfileDropdownOpen(false);
+                          navigate('profile');
+                        }}
+                        className="w-full text-left px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 rounded-xl flex items-center gap-2 cursor-pointer transition-colors"
                       >
-                        <ShieldCheck className="w-4 h-4 text-slate-400" />
-                        <span>Historial y facturas</span>
+                        <User className="w-4 h-4 text-slate-400" />
+                        <span>Ver mi perfil completo</span>
                       </button>
-                    )}
-                  </div>
 
-                  <div className="pt-1 border-t border-slate-100">
-                    <button
-                      onClick={() => navigate('login')}
-                      className="w-full text-left px-3 py-2 text-xs font-bold text-[#E5484D] hover:bg-rose-50 rounded-lg flex items-center gap-2"
-                    >
-                      <LogOut className="w-4 h-4 text-[#E5484D]" />
-                      <span>Cerrar sesión</span>
-                    </button>
+                      <button
+                        onClick={() => {
+                          setIsProfileDropdownOpen(false);
+                          navigate('login');
+                        }}
+                        className="w-full text-left px-3 py-2.5 text-xs font-bold text-[#E5484D] hover:bg-rose-50 rounded-xl flex items-center gap-2 cursor-pointer transition-colors"
+                      >
+                        <LogOut className="w-4 h-4 text-[#E5484D]" />
+                        <span>Cerrar sesión</span>
+                      </button>
+                    </div>
                   </div>
-                </div>
+                </>
               )}
             </div>
 

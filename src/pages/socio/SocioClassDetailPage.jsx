@@ -52,7 +52,7 @@ export function SocioClassDetailPage() {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="text-[10px] font-black uppercase text-slate-400 tracking-wider">
-                MÓDULO 3 · CLASES GRUPALES
+                CLASES GRUPALES
               </span>
               {classItem.status === 'PROGRAMADA' && <Badge variant="green-soft">PROGRAMADA</Badge>}
               {classItem.status === 'COMPLETA' && <Badge variant="gold-soft">COMPLETA</Badge>}

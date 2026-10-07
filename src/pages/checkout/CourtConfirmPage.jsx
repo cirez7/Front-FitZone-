@@ -60,7 +60,7 @@ export function CourtConfirmPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-6 border-b border-slate-100">
           <div>
             <span className="text-[10px] font-black uppercase text-slate-400 tracking-wider">
-              MÓDULO 4 · CANCHAS DEPORTIVAS
+              CONFIRMACIÓN DE RESERVA
             </span>
             <h1 className="text-2xl sm:text-3xl font-black text-[#1B2A55] font-outfit mt-0.5">
               Confirmar reserva
@@ -149,7 +149,14 @@ export function CourtConfirmPage() {
 
             <div className="pt-3 border-t border-slate-200 flex items-center justify-between text-base font-black text-[#1B2A55]">
               <span>Total a pagar</span>
-              <span className="text-xl text-[#1B2A55]">${booking.totalPrice?.toLocaleString('es-AR')}</span>
+              <div className="flex items-baseline gap-2">
+                {booking.memberDiscount < 0 && (
+                  <span className="text-sm font-bold text-slate-400 line-through">
+                    ${((booking.basePrice || 10000) + (booking.peakSurge || 0)).toLocaleString('es-AR')}
+                  </span>
+                )}
+                <span className="text-xl text-[#1B2A55]">${booking.totalPrice?.toLocaleString('es-AR')}</span>
+              </div>
             </div>
           </div>
 

@@ -1,14 +1,14 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import {
-  Layers,
-  Calendar,
-  Sparkles,
-  MapPin,
-  ArrowRight,
-  Dumbbell,
-  CheckCircle2,
-  ShieldPlus
+import { 
+  Layers, 
+  Calendar, 
+  Sparkles, 
+  MapPin, 
+  ArrowRight, 
+  Dumbbell, 
+  CheckCircle2, 
+  ShieldPlus 
 } from 'lucide-react';
 import { Badge } from '../../components/ui/Badge';
 
@@ -17,11 +17,7 @@ export function ExternoHomePage() {
 
   return (
     <div className="space-y-6 animate-fade-in pb-12">
-
-      {/* Hero Header */}
-
-      {/* Test commit GitHub */}
-
+      
       {/* Hero Header */}
       <div className="bg-gradient-to-br from-[#1B2A55] to-[#111A36] text-white rounded-3xl p-6 sm:p-8 shadow-card relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-[#F0B429]/15 rounded-full blur-3xl pointer-events-none" />
@@ -32,7 +28,7 @@ export function ExternoHomePage() {
               <Sparkles className="w-3.5 h-3.5 text-[#F0B429]" />
               <span>Cliente Externo · Sin suscripción requerida</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-black font-outfit tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-black font-outfit tracking-tight text-white">
               ¡Te damos la bienvenida, {currentUser.name.split(' ')[0]}!
             </h1>
             <p className="text-xs sm:text-sm text-slate-300 max-w-lg leading-relaxed">
@@ -54,9 +50,9 @@ export function ExternoHomePage() {
 
       {/* Main Options Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
+        
         {/* Card 1: Reservar Cancha */}
-        <div
+        <div 
           onClick={() => navigate('courts')}
           className="bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-100 transition-all cursor-pointer group flex flex-col justify-between"
         >
@@ -79,7 +75,7 @@ export function ExternoHomePage() {
         </div>
 
         {/* Card 2: Mis Reservas */}
-        <div
+        <div 
           onClick={() => navigate('reservations')}
           className="bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-100 transition-all cursor-pointer group flex flex-col justify-between"
         >
@@ -102,7 +98,7 @@ export function ExternoHomePage() {
         </div>
 
         {/* Card 3: Ascender a Socio Plan Premium */}
-        <div
+        <div 
           onClick={() => navigate('profile')}
           className="bg-gradient-to-br from-[#FEF7E6] to-[#FEEAEA] rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-[#F0B429]/30 transition-all cursor-pointer group flex flex-col justify-between"
         >

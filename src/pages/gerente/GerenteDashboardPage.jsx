@@ -20,7 +20,7 @@ import { StatCard } from '../../components/ui/StatCard';
 import { Modal } from '../../components/ui/Modal';
 
 export function GerenteDashboardPage() {
-  const { addToast } = useApp();
+  const { addToast, currentRoute } = useApp();
   const [selectedMonth, setSelectedMonth] = useState('Octubre 2026');
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
@@ -38,6 +38,33 @@ export function GerenteDashboardPage() {
     setIsReportModalOpen(false);
   };
 
+  const getPageTitle = () => {
+    switch (currentRoute) {
+      case 'gerente-reportes':
+        return {
+          title: 'Membresías e Ingresos Consolidados',
+          subtitle: 'Análisis comparativo de recaudación por sede y retención de cartera activa'
+        };
+      case 'gerente-reportes-pdf':
+        return {
+          title: 'Reportes Ejecutivos Oficiales',
+          subtitle: 'Generación, auditoría y descarga consolidada en formato PDF de las 27 sedes'
+        };
+      case 'gerente-parametros':
+        return {
+          title: 'Parámetros Globales del Sistema',
+          subtitle: 'Configuración de aforos, políticas de reservas y recargos de la red FitZone Sports'
+        };
+      default:
+        return {
+          title: 'Rendimiento Consolidado',
+          subtitle: 'Octubre 2026 · 27 sedes activas · actualizado hoy 09:42 hs'
+        };
+    }
+  };
+
+  const pageInfo = getPageTitle();
+
   return (
     <div className="space-y-6 animate-fade-in max-w-7xl mx-auto pb-12">
       
@@ -48,10 +75,10 @@ export function GerenteDashboardPage() {
             GERENCIA CENTRAL · RED NACIONAL FITZONE SPORTS
           </span>
           <h1 className="text-2xl sm:text-3xl font-black text-[#1B2A55] font-outfit mt-0.5">
-            Rendimiento Consolidado
+            {pageInfo.title}
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            Octubre 2026 · 27 sedes activas · actualizado hoy 09:42 hs
+            {pageInfo.subtitle}
           </p>
         </div>
 
@@ -105,6 +132,63 @@ export function GerenteDashboardPage() {
           color="white"
         />
       </div>
+
+      {/* Panel contextual: Parámetros del Sistema */}
+      {currentRoute === 'gerente-parametros' && (
+        <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-card border border-slate-100 space-y-6 animate-slide-up">
+          <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+            <div>
+              <h3 className="text-lg font-black text-[#1B2A55] font-outfit">
+                Parámetros Operativos Centralizados
+              </h3>
+              <p className="text-xs text-slate-500">Reglas aplicadas a las 27 sedes en tiempo real</p>
+            </div>
+            <Badge variant="green-soft">SINCRONIZADO</Badge>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+              <span className="text-[10px] font-bold text-slate-400 uppercase">Beneficio Socio Activo</span>
+              <span className="text-xl font-black text-[#1B2A55] block">15% de Descuento</span>
+              <p className="text-[11px] text-slate-500">En reservas de canchas y turnos pico.</p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+              <span className="text-[10px] font-bold text-slate-400 uppercase">Recargo Horario Pico</span>
+              <span className="text-xl font-black text-[#F26D6D] block">+20% Tarifa</span>
+              <p className="text-[11px] text-slate-500">Franja de 19:00 a 21:00 hs en canchas.</p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+              <span className="text-[10px] font-bold text-slate-400 uppercase">Alerta de Aforo Máximo</span>
+              <span className="text-xl font-black text-[#E5484D] block">85% Capacidad</span>
+              <p className="text-[11px] text-slate-500">Disparo automático de alerta en recepción.</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Panel contextual: Reportes Ejecutivos PDF */}
+      {currentRoute === 'gerente-reportes-pdf' && (
+        <div className="bg-[#1B2A55] text-white rounded-3xl p-6 sm:p-8 shadow-card flex flex-col sm:flex-row items-center justify-between gap-6 animate-slide-up">
+          <div className="space-y-1">
+            <span className="text-[10px] font-black uppercase tracking-wider text-[#F0B429]">
+              AUDITORÍA Y CIERRE MENSUAL
+            </span>
+            <h3 className="text-2xl font-black font-outfit">Reporte Consolidado Octubre 2026</h3>
+            <p className="text-xs text-slate-300 max-w-lg">
+              Incluye balance contable de $1.284M ARS, ocupación media de 68,4% y desglose por cada una de las 27 sedes operativas.
+            </p>
+          </div>
+          <button
+            onClick={handleDownloadExecutiveReport}
+            className="px-6 py-3.5 bg-[#F26D6D] hover:bg-[#e05959] text-white font-extrabold text-xs rounded-xl shadow-lg flex items-center gap-2 cursor-pointer shrink-0"
+          >
+            <Download className="w-4 h-4" />
+            <span>Descargar Reporte Completo (PDF)</span>
+          </button>
+        </div>
+      )}
 
       {/* Charts & Graphs Row */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

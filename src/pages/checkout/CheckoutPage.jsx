@@ -227,7 +227,14 @@ export function CheckoutPage() {
 
               <div className="pt-3 border-t border-slate-200 flex justify-between items-baseline text-[#1B2A55]">
                 <span className="font-extrabold text-sm">Total a pagar</span>
-                <span className="text-2xl font-black">${rawAmount.toLocaleString('es-AR')}</span>
+                <div className="flex items-baseline gap-2">
+                  {isCourtBooking && booking?.memberDiscount < 0 && (
+                    <span className="text-sm font-bold text-slate-400 line-through">
+                      ${((booking.basePrice || 10000) + (booking.peakSurge || 0)).toLocaleString('es-AR')}
+                    </span>
+                  )}
+                  <span className="text-2xl font-black">${rawAmount.toLocaleString('es-AR')}</span>
+                </div>
               </div>
             </div>
 

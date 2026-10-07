@@ -78,7 +78,7 @@ const initialUsers = {
   [ROLES.RECEPCION]: {
     name: 'Lucía Sánchez',
     role: ROLES.RECEPCION,
-    roleLabel: 'RECEPCIÓN',
+    roleLabel: 'Recepcionista',
     staffId: 'REC-0412',
     email: 'lucia.sanchez@fitzone.com',
     dni: '29.340.118',
@@ -554,7 +554,7 @@ export function AppProvider({ children }) {
     setToasts(prev => prev.filter(t => t.id !== id));
   };
 
-  // Switch role and update route accordingly
+  // Switch role and update route accordingly (sin toasts de notificación de rol)
   const switchRole = (newRole) => {
     setCurrentRole(newRole);
     setCurrentUser(initialUsers[newRole]);
@@ -562,19 +562,14 @@ export function AppProvider({ children }) {
 
     if (newRole === ROLES.RECEPCION) {
       setCurrentRoute('recepcion-dashboard');
-      addToast('Modo Recepción Activado', 'Panel de administración de sede Palermo.', 'info');
     } else if (newRole === ROLES.GERENTE_CENTRAL) {
       setCurrentRoute('gerente-dashboard');
-      addToast('Modo Gerencia Central', 'Visualizando consolidado de las 27 sedes.', 'info');
     } else if (newRole === ROLES.EXTERNO) {
       setCurrentRoute('home');
-      addToast('Modo Cliente Externo', 'Acceso para reservas puntuales de canchas sin membresía.', 'info');
     } else if (newRole === ROLES.SOCIO_VENCIDO) {
       setCurrentRoute('home');
-      addToast('Modo Socio Vencido', 'Podés probar el flujo de regularización y renovación.', 'warning');
     } else {
       setCurrentRoute('home');
-      addToast('Modo Socio Activo', 'Acceso pleno a clases, canchas con -15% y QR digital.', 'success');
     }
   };
 
@@ -808,7 +803,8 @@ export function AppProvider({ children }) {
 
     setAccessLogs(prev => [newLog, ...prev]);
     if (!isDenied) {
-      setSedes(prev => prev.map(s => s.name.includes('Palermo') ? { ...s, aforo: Math.min(s.maxAforo, s.aforo + 1) } : s));
+      // El indicador de aforo es influenciado ÚNICAMENTE por escaneos efectivos de QR de acceso
+      setSedes(prev => prev.map(s => (s.fullName === selectedSede || s.name === selectedSede || selectedSede.includes(s.name)) ? { ...s, aforo: Math.min(s.maxAforo, s.aforo + 1) } : s));
     }
     return newLog;
   };

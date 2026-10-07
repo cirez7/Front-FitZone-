@@ -45,6 +45,9 @@ import { RecepcionCashRegisterPage } from './pages/recepcion/RecepcionCashRegist
 // Gerente Central Pages
 import { GerenteDashboardPage } from './pages/gerente/GerenteDashboardPage';
 
+// More Options Page
+import { MoreOptionsPage } from './pages/MoreOptionsPage';
+
 export default function App() {
   const { currentRoute, currentRole } = useApp();
 
@@ -92,6 +95,8 @@ export default function App() {
           return <SocioSedesPage />;
         case 'profile':
           return <RecepcionDashboardPage />;
+        case 'more':
+          return <MoreOptionsPage />;
         default:
           return <RecepcionDashboardPage />;
       }
@@ -101,11 +106,16 @@ export default function App() {
     if (currentRole === ROLES.GERENTE_CENTRAL) {
       switch (currentRoute) {
         case 'gerente-dashboard':
+        case 'gerente-reportes':
+        case 'gerente-reportes-pdf':
+        case 'gerente-parametros':
           return <GerenteDashboardPage />;
         case 'sedes':
           return <SocioSedesPage />;
         case 'profile':
           return <GerenteDashboardPage />;
+        case 'more':
+          return <MoreOptionsPage />;
         default:
           return <GerenteDashboardPage />;
       }
@@ -130,6 +140,8 @@ export default function App() {
           return <SocioSedesPage />;
         case 'profile':
           return <ExternoProfilePage />;
+        case 'more':
+          return <MoreOptionsPage />;
         default:
           return <ExternoHomePage />;
       }
@@ -163,6 +175,8 @@ export default function App() {
         return <SocioAccessQRPage />;
       case 'profile':
         return <SocioProfilePage />;
+      case 'more':
+        return <MoreOptionsPage />;
       default:
         return <SocioHomePage />;
     }

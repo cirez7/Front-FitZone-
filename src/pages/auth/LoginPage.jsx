@@ -154,28 +154,32 @@ export function LoginPage() {
           </span>
           <div className="grid grid-cols-2 gap-2 text-xs">
             <button
+              type="button"
               onClick={() => handleQuickDemo(ROLES.SOCIO_ACTIVO)}
-              className="p-2 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-left border border-slate-200"
+              className="p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-left border border-slate-200 transition-colors"
             >
-              🏋️ Socio Activo
+              Socio Activo
             </button>
             <button
+              type="button"
               onClick={() => handleQuickDemo(ROLES.EXTERNO)}
-              className="p-2 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-left border border-slate-200"
+              className="p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-left border border-slate-200 transition-colors"
             >
-              🎾 Cliente Externo
+              Cliente Externo
             </button>
             <button
+              type="button"
               onClick={() => handleQuickDemo(ROLES.RECEPCION)}
-              className="p-2 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-left border border-slate-200"
+              className="p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-left border border-slate-200 transition-colors"
             >
-              🏢 Recepción
+              Recepcionista
             </button>
             <button
+              type="button"
               onClick={() => handleQuickDemo(ROLES.GERENTE_CENTRAL)}
-              className="p-2 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-left border border-slate-200"
+              className="p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-left border border-slate-200 transition-colors"
             >
-              📊 Gerente Central
+              Gerente Central
             </button>
           </div>
         </div>

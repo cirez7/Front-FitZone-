@@ -27,7 +27,7 @@ export function RecepcionDashboardPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <span className="text-[10px] font-black uppercase text-slate-400 tracking-wider">
-            MÓDULO 1 · USUARIOS Y MEMBRESÍAS · RECEPCIÓN
+            GESTIÓN DE USUARIOS Y MEMBRESÍAS · RECEPCIÓN
           </span>
           <h1 className="text-2xl sm:text-3xl font-black text-[#1B2A55] font-outfit mt-0.5">
             Operación diaria · {selectedSede}
