@@ -287,6 +287,26 @@ export function MoreOptionsPage() {
           </button>
 
           <button
+            onClick={() => navigate('playground')}
+            className="w-full p-4 flex items-center justify-between text-left hover:bg-slate-50/80 transition-colors group cursor-pointer"
+          >
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-[#F26D6D]/10 flex items-center justify-center text-[#F26D6D] group-hover:bg-[#F26D6D] group-hover:text-white transition-colors">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <div>
+                <span className="text-sm font-extrabold text-[#1B2A55] block">
+                  Librería de Componentes (UI Kit)
+                </span>
+                <span className="text-xs text-slate-400">
+                  Explorar componentes base, variantes y estados interactivos
+                </span>
+              </div>
+            </div>
+            <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-[#1B2A55] transition-colors" />
+          </button>
+
+          <button
             onClick={() => navigate('login')}
             className="w-full p-4 flex items-center justify-between text-left hover:bg-rose-50/80 transition-colors group cursor-pointer"
           >

@@ -48,6 +48,9 @@ import { GerenteDashboardPage } from './pages/gerente/GerenteDashboardPage';
 // More Options Page
 import { MoreOptionsPage } from './pages/MoreOptionsPage';
 
+// UI Kit Playground Page
+import { PlaygroundPage } from './pages/PlaygroundPage';
+
 export default function App() {
   const { currentRoute, currentRole } = useApp();
 
@@ -74,6 +77,10 @@ export default function App() {
 
   // Dynamic Route Resolver
   const renderCurrentView = () => {
+    // Universal routes accessible from all roles
+    if (currentRoute === 'playground') {
+      return <PlaygroundPage />;
+    }
     // Reception Views
     if (currentRole === ROLES.RECEPCION) {
       switch (currentRoute) {

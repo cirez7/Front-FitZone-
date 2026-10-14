@@ -1,13 +1,20 @@
 import React from 'react';
 
-export function Badge({ children, variant = 'default', size = 'md', className = '' }) {
-  const baseClasses = 'inline-flex items-center font-bold tracking-wide uppercase rounded-full transition-colors';
-  
+export function Badge({
+  children,
+  variant = 'default',
+  size = 'md',
+  showDot = false,
+  className = '',
+}) {
+  const baseClasses =
+    'inline-flex items-center font-bold tracking-wide uppercase rounded-full select-none transition-colors';
+
   const sizeClasses = {
-    xs: 'px-2 py-0.5 text-[10px]',
-    sm: 'px-2.5 py-0.5 text-xs',
-    md: 'px-3 py-1 text-xs',
-    lg: 'px-3.5 py-1.5 text-sm',
+    xs: 'px-2 py-0.5 text-[10px] gap-1',
+    sm: 'px-2.5 py-0.5 text-xs gap-1.5',
+    md: 'px-3 py-1 text-xs gap-1.5',
+    lg: 'px-3.5 py-1.5 text-sm gap-2',
   };
 
   const variantClasses = {
@@ -25,8 +32,37 @@ export function Badge({ children, variant = 'default', size = 'md', className = 
     dark: 'bg-slate-900 text-white',
   };
 
+  const dotColorClasses = {
+    default: 'bg-slate-400',
+    navy: 'bg-white',
+    'navy-soft': 'bg-[#1B2A55]',
+    coral: 'bg-white',
+    'coral-soft': 'bg-[#F26D6D]',
+    green: 'bg-white',
+    'green-soft': 'bg-[#2E9E5B]',
+    gold: 'bg-[#1B2A55]',
+    'gold-soft': 'bg-[#B7791F]',
+    red: 'bg-white',
+    'red-soft': 'bg-[#E5484D]',
+    dark: 'bg-white',
+  };
+
   return (
-    <span className={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant] || variantClasses.default} ${className}`}>
+    <span
+      className={`
+        ${baseClasses}
+        ${sizeClasses[size] || sizeClasses.md}
+        ${variantClasses[variant] || variantClasses.default}
+        ${className}
+      `}
+    >
+      {showDot && (
+        <span
+          className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+            dotColorClasses[variant] || 'bg-current'
+          }`}
+        />
+      )}
       {children}
     </span>
   );

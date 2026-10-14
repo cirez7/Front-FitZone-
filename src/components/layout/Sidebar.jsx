@@ -17,7 +17,8 @@ import {
   FileText,
   Sliders,
   LogOut,
-  ChevronRight
+  ChevronRight,
+  Sparkles
 } from 'lucide-react';
 
 export function Sidebar() {
@@ -137,8 +138,25 @@ export function Sidebar() {
         </nav>
       </div>
 
-      {/* Bottom Sidebar Footer (referencias técnicas eliminadas) */}
+      {/* Bottom Sidebar Footer */}
       <div className="pt-4 border-t border-slate-100 space-y-2">
+        <button
+          onClick={() => navigate('playground')}
+          className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            currentRoute === 'playground'
+              ? 'bg-[#1B2A55] text-white shadow-sm'
+              : 'text-slate-600 hover:text-[#1B2A55] hover:bg-slate-100'
+          }`}
+        >
+          <div className="flex items-center gap-2.5">
+            <Sparkles className="w-4 h-4 text-[#F26D6D]" />
+            <span>UI Kit Playground</span>
+          </div>
+          <span className="text-[10px] font-black uppercase bg-[#F26D6D]/15 text-[#F26D6D] px-1.5 py-0.5 rounded-md">
+            UI
+          </span>
+        </button>
+
         <button
           onClick={() => navigate('login')}
           className="w-full flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-[#E5484D] hover:bg-rose-50 transition-colors cursor-pointer"

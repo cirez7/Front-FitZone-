@@ -9,11 +9,12 @@ import {
   MapPin,
   Layers,
   ChevronDown,
-  Check
+  Check,
+  Sparkles
 } from 'lucide-react';
 
 export function RoleSwitcher() {
-  const { currentRole, switchRole, selectedSede, setSelectedSede, sedes } = useApp();
+  const { currentRole, switchRole, selectedSede, setSelectedSede, sedes, navigate, currentRoute } = useApp();
   const [isSocioHovered, setIsSocioHovered] = useState(false);
 
   const isSocio = currentRole === ROLES.SOCIO_ACTIVO || currentRole === ROLES.SOCIO_VENCIDO;
@@ -130,8 +131,22 @@ export function RoleSwitcher() {
           </div>
         </div>
 
-        {/* Right: Sede selector */}
+        {/* Right: UI Kit Playground & Sede selector */}
         <div className="flex items-center gap-2">
+          {/* UI Kit Button */}
+          <button
+            onClick={() => navigate('playground')}
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+              currentRoute === 'playground'
+                ? 'bg-[#F26D6D] text-white shadow-sm ring-2 ring-white/30 scale-105'
+                : 'bg-white/10 text-slate-200 hover:bg-[#F26D6D] hover:text-white'
+            }`}
+            title="Abrir Playground / Showcase de Componentes Base (UI Kit)"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#F0B429]" />
+            <span className="font-extrabold tracking-wide">UI Kit</span>
+          </button>
+
           <div className="flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded-lg text-slate-200">
             <MapPin className="w-3 h-3 text-[#F26D6D]" />
             <select
